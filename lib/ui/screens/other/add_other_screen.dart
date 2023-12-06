@@ -136,92 +136,94 @@ class _AddOtherScreenState extends State<AddOtherScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            _image == null
-                ? TextButton(
-                    onPressed: () {
-                      getImage();
-                    },
-                    child: const Text('Добавить изоображение'))
-                : Image.file(
-                    _image!,
-                    width: MediaQuery.of(context).size.width,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  ),
-            _galleryUrls.length == 0
-                ? TextButton(
-                    onPressed: () {
-                      getGallery();
-                    },
-                    child: const Text('Добавить галерию'))
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: _galleryUrls.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Image.network(
-                            _galleryUrls[index],
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: 20,
-                            fit: BoxFit.cover,
-                          ),
-                        );
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _image == null
+                  ? TextButton(
+                      onPressed: () {
+                        getImage();
                       },
+                      child: const Text('Добавить изображение'))
+                  : Image.file(
+                      _image!,
+                      width: MediaQuery.of(context).size.width,
+                      height: 150,
+                      fit: BoxFit.cover,
                     ),
-                  ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _name = value;
-              },
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Название'),
-            ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _description = value;
-              },
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Город и район'),
-            ),
-            TextFormField(
-              onChanged: (value) {
-                _city = value;
-              },
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Город'),
-            ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _note = value;
-              },
-              decoration: InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Описание'),
-            ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _location = value;
-              },
-              decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Ссылка на объект из Гугл карты'),
-            ),
-            ElevatedButton(
-                onPressed: _imageUrl != ''
-                    ? () {
-                        _postNews(context);
-                        Navigator.of(context).pop();
-                      }
-                    : () {},
-                child: const Text('Загрузить'))
-          ],
+              _galleryUrls.length == 0
+                  ? TextButton(
+                      onPressed: () {
+                        getGallery();
+                      },
+                      child: const Text('Добавить галерию'))
+                  : Expanded(
+                      child: ListView.builder(
+                        itemCount: _galleryUrls.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Image.network(
+                              _galleryUrls[index],
+                              width: MediaQuery.of(context).size.width / 3,
+                              height: 20,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _name = value;
+                },
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Название'),
+              ),
+              TextFormField(
+                onChanged: (value) {
+                  _city = value;
+                },
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Город'),
+              ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _description = value;
+                },
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Район'),
+              ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _note = value;
+                },
+                decoration: InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Описание'),
+              ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _location = value;
+                },
+                decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Ссылка на объект из Гугл карты'),
+              ),
+              ElevatedButton(
+                  onPressed: _imageUrl != ''
+                      ? () {
+                          _postNews(context);
+                          Navigator.of(context).pop();
+                        }
+                      : () {},
+                  child: const Text('Загрузить'))
+            ],
+          ),
         ),
       ),
     );
