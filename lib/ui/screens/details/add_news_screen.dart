@@ -83,52 +83,54 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            _image == null
-                ? TextButton(
-                    onPressed: () {
-                      getImage();
-                    },
-                    child: const Text('Добавить изоображение'))
-                : Image.file(
-                    _image!,
-                    width: MediaQuery.of(context).size.width,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _title = value;
-              },
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Заголовок'),
-            ),
-            TextFormField(
-              onChanged: (value) {
-                _category = value;
-              },
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Категорий'),
-            ),
-            TextField(
-              maxLines: null,
-              onChanged: (value) {
-                _description = value;
-              },
-              decoration: InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Описание'),
-            ),
-            ElevatedButton(
-                onPressed: _imageUrl != ''
-                    ? () {
-                        _postNews(context);
-                        Navigator.of(context).pop();
-                      }
-                    : () {},
-                child: const Text('Загрузить'))
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _image == null
+                  ? TextButton(
+                      onPressed: () {
+                        getImage();
+                      },
+                      child: const Text('Добавить изоображение'))
+                  : Image.file(
+                      _image!,
+                      width: MediaQuery.of(context).size.width,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _title = value;
+                },
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Заголовок'),
+              ),
+              TextFormField(
+                onChanged: (value) {
+                  _category = value;
+                },
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Категория'),
+              ),
+              TextField(
+                maxLines: null,
+                onChanged: (value) {
+                  _description = value;
+                },
+                decoration: InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Описание'),
+              ),
+              ElevatedButton(
+                  onPressed: _imageUrl != ''
+                      ? () {
+                          _postNews(context);
+                          Navigator.of(context).pop();
+                        }
+                      : () {},
+                  child: const Text('Загрузить'))
+            ],
+          ),
         ),
       ),
     );
